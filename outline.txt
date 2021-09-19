@@ -1,0 +1,67 @@
+components
+----------
+
+starting_grid:
+    a matrix containing ones and zeros
+
+cell
+    a cell in the grid containing a one or zero
+
+starting_grid_state
+    a string of ones and zeros representing the cells 
+    in the grid
+
+turn_grid_state
+    the grid state after n turns
+
+border
+    added cells surrounding the grid containing
+    fixed values of one or zero. Not subject to 
+    the rules of the game.
+
+turns
+    the number of times the rules have been applied
+    to the grid
+
+neighbours
+    the eight cells surrounding a cell in the grid
+
+the_rules
+    Conways rules for the Game of Life
+    to determine the next state of a cell after one turn.
+
+    Any live cell with two or three 
+        neighbours survives.
+    Any dead cell with three live neighbours 
+        becomes a live cell.
+    All other live cells 
+        die in the next generation
+    All other dead cells stay dead.
+
+    rules are applied to each cell according to the state of the
+    grid as it starts, not after a cell has been changed
+
+next_grid:
+    The grid state after the rules have been applied to all cells
+    in the starting grid 
+
+starting_state_db
+    A store of the starting states already processed
+
+turn_state_db
+    A store of the each starting_grid's full set of states
+
+
+
+process
+-------
+
+set the grid size -->
+set the padding type -->
+make a random grid to the size and padding specification -->
+record the starting state -->
+iterate the rules on the grid until the grid repeats itself,
+    recording each individual state -->
+continue processing random grids to the specification
+    until all permutations have been processed -->
+export all the results to storage
