@@ -1,0 +1,21 @@
+Data Capture
+
+Monitoring the application
+
+- start time for processing
+- end time for processing
+- time taken to process all combinations
+
+CGOL States
+
+- id of initial state
+- subsequent states for each iteration
+- total number of states before completion
+- longest set of iterations per seed
+- shortest set of iterations per seed
+- total infinite loop iterations
+
+ML Ideas
+
+- Spot shapes in matrices
+- Classify shapes
