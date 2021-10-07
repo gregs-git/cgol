@@ -87,6 +87,7 @@ def get_full_turn_set(grid, turns_db, turns):
         grid = process_grid(grid, rows, columns)
         grid_state = get_grid_state(grid)
         if grid_state in turns_db:
+            print("Complete")
             break
         else:
             turns_db.append(grid_state)
@@ -111,3 +112,4 @@ def process_all_seeds(rows, columns):
     return len(starting_state_db)
 
 process_all_seeds(rows, columns)
+print(2**(rows*columns))
