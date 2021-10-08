@@ -1,0 +1,8 @@
+todo
+====
+
+- add list of tools to be added to roadmap eg containers, beam, documentation software
+- manage version releases in github against roadmap
+- personal website 
+- implement any basic database
+- implement any basic viz tool
