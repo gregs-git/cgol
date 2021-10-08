@@ -9,7 +9,3 @@ ROADMAP
 0.2 - a better terminal display of the process
 
 0.3 - add database for persistent storage of results
-
-TODO
-
-- Understand versioning in github
