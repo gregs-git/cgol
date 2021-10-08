@@ -73,13 +73,18 @@ def get_next_grid(grid, rows, columns):
             next_grid.append(new_cell_value)
     next_grid = np.array(next_grid).reshape(rows,columns)
     next_grid = add_zero_border(next_grid)
+    return next_grid
+
+def process_grid(grid, rows, columns):
+    next_grid = get_next_grid(grid, rows, columns)
+    grid = next_grid
     return grid
 
 def get_full_turn_set(grid, turns_db, turns):
     """Create new grids from an initial grid by applying the rules 
     successively until a grid that has already been seen is created"""
     while True:    
-        grid = get_next_grid(grid, rows, columns)
+        grid = process_grid(grid, rows, columns)
         grid_state = get_grid_state(grid)
         if grid_state in turns_db:
             print("Complete")
@@ -106,5 +111,9 @@ def process_all_seeds(rows, columns):
             get_full_turn_set(grid, turns_db, turns)
     return len(starting_state_db)
 
-process_all_seeds(rows, columns)
-print(2**(rows*columns))
+def main():
+    process_all_seeds(rows, columns)
+    print(2**(rows*columns))
+
+if __name__ == "__main__":
+    main()
