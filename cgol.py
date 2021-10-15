@@ -1,6 +1,7 @@
 import numpy as np
 from itertools import chain
 from time import sleep
+import pandas as pd
 
 rows = 3
 columns = 3
@@ -82,23 +83,30 @@ def process_grid(grid, rows, columns):
 
 def get_full_turn_set(grid, turns_db, turns):
     """Create new grids from an initial grid by applying the rules 
-    successively until a grid that has already been seen is created"""
-    while True:    
-        grid = process_grid(grid, rows, columns)
-        grid_state = get_grid_state(grid)
-        if grid_state in turns_db:
+    successively until a grid that has already been seen is created.
+    Return all the combinations in a list"""
+    grid_state = get_grid_state(grid)
+    turns_db.append(grid_state)
+    while True:
+        next_grid = process_grid(grid, rows, columns)
+        next_grid_state = get_grid_state(next_grid)
+        if next_grid_state in turns_db:
             print("Complete")
             break
         else:
-            turns_db.append(grid_state)
+            turns_db.append(next_grid_state)
             turns += 1
-            print(grid)
+            print(next_grid)
             print(turns)
+            grid = next_grid
+    return turns_db
 
 def process_all_seeds(rows, columns):
     """Generate and process every possible initial grid combination
-    and return number total initial grids processed"""
+    and return number total initial grids processed. Return all the
+    sequences as a list"""
     starting_state_db = []
+    set_db = []
     while len((starting_state_db)) < 2**(rows*columns):   
         grid = create_grid(rows, columns)
         grid = add_zero_border(create_grid(rows, columns))
@@ -106,14 +114,17 @@ def process_all_seeds(rows, columns):
         if starting_grid_state in starting_state_db:
             print(len(starting_state_db), 2**(rows*columns))
         else:
+            print(grid)
+            print(0)
             starting_state_db.append(starting_grid_state)
             turns_db = []
-            get_full_turn_set(grid, turns_db, turns)
-    return len(starting_state_db)
+            turns_db = get_full_turn_set(grid, turns_db, turns)
+            set_db.append(turns_db)
+    return set_db
 
 def main():
-    process_all_seeds(rows, columns)
-    print(2**(rows*columns))
+    full_set_df = pd.DataFrame(process_all_seeds(rows, columns))
+    print(full_set_df)
 
 if __name__ == "__main__":
     main()
